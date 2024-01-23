@@ -7,11 +7,13 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 0)
             <div class="flex justify-end mb-4">
                 <a href={{ route('projects.create') }} type="button"
                     class="focus:outline-none text-gray-600 text-sm py-2.5 px-5 rounded-full border border-gray-600 hover:border-white hover:bg-indigo-400 hover:text-white transition-all duration-300 ease-linear">New
                     Project</a>
-            </div>
+            </div> 
+            @endif
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex flex-col">
@@ -23,8 +25,13 @@
                                 <thead>
                                     <tr>
                                         <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Name</th>
+                                        <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Project Details</th>
                                         <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">Descriptions</th>
+                                        <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">Status</th>
+                                        <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">developer</th>
+                                        @if(Auth::user()->is_admin == 1)
                                         <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Action</th>
+                                        @endif
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y">
@@ -35,9 +42,19 @@
                                                 <span class="text-sm font-light text-gray-400">Updated
                                                     {{ $project->created_at }}</span>
                                             </td>
+                                            <td class="px-6 py-4 text-center">{{ $project->project_update }}</td>
                                             <td class="px-6 py-4 text-center">{{ $project->description }}</td>
+
+                                            @foreach (optional($project->issues)->pluck('status') ?? [] as $status)
+                                            <td class="px-6 py-4 text-center">{{ $status }}</td>
+                                            @endforeach
+
+                                            @foreach (optional($project->users)->pluck('name') ?? [] as $name)
+                                            <td class="px-6 py-4 text-center">{{ $name }}</td>
+                                            @endforeach
+                                            @if(Auth::user()->is_admin == 1)
                                             <td class="px-6 py-4 text-center">
-                                                <a href="{{ route('projects.show', $project->id) }}"
+                                                <!--<a href="{{ route('projects.show', $project->id) }}"
                                                     class="inline-flex focus:outline-none text-white text-sm py-1 px-2 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
                                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                                         viewBox="0 0 24 24" stroke="currentColor">
@@ -47,7 +64,7 @@
                                                             stroke-width="2"
                                                             d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                     </svg>
-                                                </a>
+                                                </a> -->
                                                 <a href="{{ route('projects.edit', $project->id) }}"
                                                     class="inline-flex focus:outline-none text-white text-sm py-1 px-2 rounded-md bg-yellow-500 hover:bg-yellow-600 hover:shadow-lg">
                                                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -72,6 +89,7 @@
                                                     </button>
                                                 </form>
                                             </td>
+                                            @endif
                                         </tr>
                                     @endforeach
                                 </tbody>

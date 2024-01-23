@@ -5,7 +5,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ __($issues->title) }}
                 </h2>
-                <span class="text-sm font-light text-gray-400">Update {{ $project->created_at }}</span>
+                <span class="text-sm font-light text-gray-400">Update {{ $issue->created_at }}</span>
             </div>
         </div>
     </x-slot>
@@ -21,7 +21,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex flex-col">
-                        @if (count($project->issues) < 1)
+                        @if (count($issue->issues) < 1)
                             <h3 class="text-lg w-full text-center">You have no Projects</h3>
                         @else
                         <div class="flex-grow overflow-auto">
@@ -31,11 +31,12 @@
                                         <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Name</th>
                                         <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">Description</th>
                                         <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Assignees</th>
+                                        <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Status</th></th>
                                         <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y">
-                                    @foreach ($project->issues as $issue)
+                                    @foreach ($issues->issues as $issue)
                                         <tr>
                                             <td class="px-6 py-4 text-left">
                                                 <h2 class="font-bold">{{ $issue->title }}</h2>

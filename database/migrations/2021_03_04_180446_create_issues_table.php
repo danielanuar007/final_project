@@ -15,12 +15,10 @@ class CreateIssuesTable extends Migration
     {
         Schema::create('issues', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id');
-            $table->string('title');
-            $table->text('description')->nullable();
-            $table->integer('number');
+            $table->unsignedBigInteger('project_id')->default(0);
             $table->unsignedBigInteger('stage_id');
             $table->unsignedBigInteger('user_id');
+            $table->text('status');
             $table->timestamps();
             $table->softDeletes();
         });

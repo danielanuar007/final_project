@@ -41,4 +41,14 @@ class Issue extends Model
     {
         return $this->belongsToMany(Label::class);
     }
+
+    public function issues(){
+        return $this->hasMany(Issue::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class); // 'project_id' should match the actual foreign key column name in the issues table
+    }
+
 }

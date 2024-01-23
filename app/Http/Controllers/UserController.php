@@ -14,10 +14,61 @@ class UserController extends Controller
      */
     public function index()
     {
-        return response()->json([
-            'status' => 'success',
-            'data' => User::with('issues')->get()
-        ]);
+        /*try { 
+            $users = User::with('name', 'email')->get(); 
+ 
+            return view('user.index', compact('users')); // Assuming you have a Blade file named 'index.blade.php' 
+        } catch (\Exception $ex) { 
+            return back()->withInput()->withErrors(['error' => 'Failed to fetch users.']); 
+        }*/
+
+        /*try { 
+            $users = User::select('name', 'email')->get(); // Fetch only 'name' and 'email' columns
+            /*dd($users);*/
+            /*return view('user.index', compact('users')); 
+        } catch (\Exception $ex) { 
+            return back()->withInput()->withErrors(['error' => 'Failed to fetch users.']); 
+        }*/
+
+        /*$users = User::with('users')->get();
+        return view('users.index', ['users' => $users]);*/
+
+        /*try { 
+            // Fetch users using the User model
+            $users = User::all(); // Change this line to fetch all users
+    
+            // Check if there are users to display
+            if (count($users) < 1) {
+                return view('user.index', ['users' => []]); // Pass an empty array of users to the view
+            }
+    
+            // Return the view with the users
+            return view('user.index', compact('users'));
+        } catch (\Exception $ex) { 
+            return back()->withInput()->withErrors(['error' => 'Failed to fetch users.']); 
+        }*/
+
+        /*try { 
+            // Fetch users along with their related issues
+            $users = User::with('issues')->get();
+    
+            // Check if there are users to display
+            if ($users->isEmpty()) {
+                return view('user.index', ['users' => []]); // Pass an empty array of users to the view
+            }
+    
+            // Return the view with the users
+            return view('user.index', compact('users'));
+        } catch (\Exception $ex) { 
+            return back()->withInput()->withErrors(['error' => 'Failed to fetch users.']); 
+        }*/
+
+        try{
+            $users = User::with('projects')->get();
+            return view('users.index', compact('users'));
+        } catch (Exception $ex){
+            return back()-> withInput()->withErrors(['error'=> 'Failed to ferch users.']);
+        }
     }
 
     /**

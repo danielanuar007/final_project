@@ -8,7 +8,7 @@
                     <span class="text-sm font-light text-gray-400">Update {{ $project->created_at }}</span>
                 </div>
                 <div>
-                    <button class="text-red-500 focus:outline-none">Delete Project</button>
+                    <!--<button class="text-red-500 focus:outline-none">Delete Project</button> -->
                 </div>
             </div>
         </x-slot>
@@ -32,8 +32,8 @@
                                     <thead>
                                         <tr>
                                             <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Name</th>
-                                            <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">Description</th>
-                                            <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Assignees</th>
+                                            <th class="px-6 py-3 w-1/2 text-gray-900 bg-gray-100">Status</th>
+                                            <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Developer</th>
                                             <th class="px-6 py-3 w-1/4 text-gray-900 bg-gray-100">Action</th>
                                         </tr>
                                     </thead>

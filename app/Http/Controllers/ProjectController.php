@@ -17,7 +17,8 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::with('issues')->get();
-        return view('projects.index', ['projects' => $projects]);
+        /*return view('projects.index', ['projects' => $projects]);*/
+        return view('projects.index', compact('projects'));
     }
 
     /**
@@ -44,10 +45,17 @@ class ProjectController extends Controller
     {
         \DB::beginTransaction();
         try {
+            // Retrieve the selected 'status' from the request
+            //$status = $request->input('project_update');
+
+            // Set the 'project_update' value based on the selected 'status'
+
             $project = Project::create([
                 'title' => $request->title,
                 'description' => $request->description,
                 'user_id' => Auth::id(),
+                'project_update' => $request->project_update,
+
             ]);
         } catch (\QueryException $ex) {
             \DB::rollback();
@@ -101,7 +109,8 @@ class ProjectController extends Controller
         try {
             $project = Project::where('id', $project->id)->update([
                 'title' => $request->title,
-                'description' => $request->description
+                'description' => $request->description,
+                'project_update' => $request->project_update, // Update the 'project_update' field
             ]);
         } catch (\QueryException $ex) {
             \DB::rollback();

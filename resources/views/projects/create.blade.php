@@ -23,6 +23,17 @@
                                 placeholder="Project Title">
                         </div>
                     </div>
+                    <label for="project update" class="block text-sm font-bold text-gray-700">
+                    Project Update
+                    </label>
+                    <div class="mt-1 flex rounded-md shadow-sm">
+                    <select name="project_update" id="project_update" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300">
+                        
+                    <option value="New Project" @if ($project->project_update === 'New Project') selected @endif>New Project</option>
+                    <option value="Existing Project" @if ($project->project_update === 'Existing Project') selected @endif>Existing Project</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
                     <div>
                         <label for="description" class="block text-sm font-bold text-gray-700">
                             Descriptions <span class="text-xs text-gray-500">(Optional)</span>

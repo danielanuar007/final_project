@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Project Management SYstem - Dashboard') }}
+                        {{ __('Project Management System - Dashboard') }}
                     </x-nav-link>
                 </div>
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
@@ -21,6 +21,8 @@
                         {{ __('Projects') }}
                     </x-nav-link>
                 </div>
+
+                @if(Auth::user()->is_admin == 1)
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('issues.index')" :active="request()->routeIs('issues.index')">
                         {{ __('Tasks') }}
@@ -32,6 +34,7 @@
                         {{ __('Users') }}
                     </x-nav-link>
                 </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->
